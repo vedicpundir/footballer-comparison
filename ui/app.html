@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Footballer Classifier</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="./dropzone.min.js"></script>
+  <link rel="stylesheet" href="./dropzone.min.css">
+  <link rel="stylesheet" href="./app.css">
+</head>
+
+<body class="bg-gray-50 min-h-screen">
+  <div class="max-w-6xl mx-auto p-6">
+    <!-- Header -->
+    <div class="text-center mb-12">
+      <h1 class="text-4xl font-bold text-gray-900 mb-2">Footballer Classifier</h1>
+      <p class="text-gray-600">Upload a footballer image to identify the player using AI</p>
+    </div>
+
+    <!-- Player Cards -->
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12">
+      <div class="player-card bg-white rounded-xl p-6 shadow-lg text-center" data-player="lionel_messi">
+        <img src="./images/messi.jpg" class="w-20 h-20 mx-auto rounded-full mb-4 object-cover" alt="Lionel Messi">
+        <h3 class="font-bold text-gray-900">Lionel Messi</h3>
+        <p class="text-sm text-gray-500">Argentina</p>
+      </div>
+      <div class="player-card bg-white rounded-xl p-6 shadow-lg text-center" data-player="mbappe">
+        <img src="./images/mbappe.jpg" class="w-20 h-20 mx-auto rounded-full mb-4 object-cover" alt="Kylian Mbappé">
+        <h3 class="font-bold text-gray-900">Kylian Mbappé</h3>
+        <p class="text-sm text-gray-500">France</p>
+      </div>
+      <div class="player-card bg-white rounded-xl p-6 shadow-lg text-center" data-player="ronaldo">
+        <img src="./images/ronaldo.jpg" class="w-20 h-20 mx-auto rounded-full mb-4 object-cover" alt="Cristiano Ronaldo">
+        <h3 class="font-bold text-gray-900">Cristiano Ronaldo</h3>
+        <p class="text-sm text-gray-500">Portugal</p>
+      </div>
+      <div class="player-card bg-white rounded-xl p-6 shadow-lg text-center" data-player="jude_bellingham">
+        <img src="./images/jude_bellingham.jpg" class="w-20 h-20 mx-auto rounded-full mb-4 object-cover" alt="Jude Bellingham">
+        <h3 class="font-bold text-gray-900">Jude Bellingham</h3>
+        <p class="text-sm text-gray-500">England</p>
+      </div>
+    </div>
+
+    <!-- Upload Section -->
+    <div class="bg-white rounded-xl shadow-lg p-8 mb-8">
+      <div class="max-w-md mx-auto">
+        <h2 class="text-xl font-semibold text-gray-900 mb-6 text-center">Upload Player Image</h2>
+
+        <form action="/file-upload" class="dropzone border-2 border-dashed border-gray-300 rounded-lg p-6" id="dropzone">
+          <div class="dz-message text-center">
+            <img src="./images/upload.png" width="50" height="50" class="mx-auto mb-3">
+            <p class="text-sm text-gray-600">Drop image here or click to browse</p>
+            <p class="text-xs text-gray-400">PNG, JPG up to 10MB</p>
+          </div>
+        </form>
+
+        <div class="text-center mt-4">
+          <button id="submitBtn"
+            class="classify-btn bg-green-500 hover:bg-green-600 text-white font-semibold py-3 px-8 rounded-xl shadow-lg">
+            Classify Player
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Error -->
+    <div id="error" class="hidden bg-red-50 border border-red-200 text-red-700 p-4 rounded-lg mb-6">
+      Can't classify image. Classifier was not able to detect face and two eyes properly.
+    </div>
+
+    <!-- Results Section -->
+    <div id="results" class="hidden">
+      <div class="grid md:grid-cols-2 gap-8">
+        <!-- Predicted Player -->
+        <div id="resultHolder" class="bg-white rounded-xl shadow-lg p-8 text-center"></div>
+
+        <!-- Probability Table -->
+        <div id="divClassTable" class="bg-white rounded-xl shadow-lg p-8">
+          <h3 class="text-xl font-semibold text-gray-900 mb-6">All Predictions</h3>
+          <table class="w-full border border-gray-200 rounded-lg overflow-hidden">
+            <thead class="bg-green-500 text-white">
+              <tr>
+                <th class="px-4 py-3 text-left">Player</th>
+                <th class="px-4 py-3 text-right">Probability</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Lionel Messi</td>
+                <td id="score_lionel_messi"></td>
+              </tr>
+              <tr>
+                <td>Cristiano Ronaldo</td>
+                <td id="score_ronaldo"></td>
+              </tr>
+              <tr>
+                <td>Jude Bellingham</td>
+                <td id="score_jude_bellingham"></td>
+              </tr>
+              <tr>
+                <td>Kylian Mbappé</td>
+                <td id="score_mbappe"></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- App Script -->
+  <script src="./app.js"></script>
+</body>
+</html>
